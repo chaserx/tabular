@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "tabular",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Pester the user when they have too many tabs open",
+    "description": "The description of the application"
+  }
+}
