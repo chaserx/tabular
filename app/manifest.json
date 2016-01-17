@@ -4,8 +4,8 @@
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
+    "16": "images/noun_158509_16.png",
+    "128": "images/noun_158509_128.png"
   },
   "default_locale": "en",
   "background": {
@@ -15,6 +15,11 @@
     ]
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "notifications"
+  ],
+
+  "web_accessible_resources": [
+    "images/noun_158509_48.png"
   ]
 }
