@@ -2,17 +2,17 @@
 
 # tabular
 
-chrome extension that pesters you when you open too many tabs
+a little chrome extension that pesters you when you open too many tabs
 
-# details
+## details
 
-# how to develop tabular
+## how to develop tabular
 
-# pull requests welcome
+## pull requests welcome
 
 see contribution guide
 
-# license
+## license
 
 This project is released under the MIT license.
 
