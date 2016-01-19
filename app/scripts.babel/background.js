@@ -19,23 +19,14 @@ function getMessage() {
 }
 
 function showNotification() {
-  return new Notification('Excessive Tab Reminder',
-                          {
-                            body: getMessage(),
-                            icon: 'images/noun_158509_48.png'
-                          });
-}
-
-// Conditionally initialize the options.
-if (!localStorage.isInitialized) {
-  localStorage.tabLimit = 10;
-  localStorage.isInitialized = true;
+  return new Notification('Excessive Tab Reminder', {
+    body: getMessage(),
+    icon: 'images/noun_158509_48.png'
+  });
 }
 
 if (window.Notification) {
-  if (JSON.parse(localStorage.tabLimit)) {
-    var tabLimit = localStorage.tabLimit;
-  }
+  var tabLimit = JSON.parse(localStorage.tabLimit) || 10;
   chrome.tabs.onCreated.addListener(function() {
     chrome.windows.getAll({populate: true}, function(allWindows) {
       var tabCount = allWindows[0].tabs.length;
