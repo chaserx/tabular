@@ -8,9 +8,12 @@ a little chrome extension that pesters you when you open too many tabs
 
 ## how to develop tabular
 
+    `npm install`
+    `gulp watch`
+
 ## pull requests welcome
 
-see contribution guide
+see [contribution guide](https://github.com/chaserx/tabular/blob/master/CONTRIBUTING.md)
 
 ## license
 
