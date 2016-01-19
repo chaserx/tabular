@@ -24,12 +24,7 @@
     "images/noun_158509_48.png"
   ],
   "options_ui": {
-    // Required.
     "page": "options.html",
-    // Recommended.
     "chrome_style": true
-    // Not recommended; only provided for backwards compatibility,
-    // and will be unsupported in a future version of Chrome (TBD).
-    //"open_in_tab": true
   }
 }
