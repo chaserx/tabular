@@ -1,9 +1,9 @@
 // generated on 2016-01-16 using generator-chrome-extension 0.5.1
-import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import del from 'del';
-import runSequence from 'run-sequence';
-import {stream as wiredep} from 'wiredep';
+const gulp = require('gulp');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const del = require('del');
+const wiredep = require('wiredep').stream;
+const runSequence = require('run-sequence');
 
 const $ = gulpLoadPlugins();
 
@@ -122,7 +122,7 @@ gulp.task('wiredep', () => {
 
 gulp.task('package', function () {
   var manifest = require('./dist/manifest.json');
-  return gulp.src('dist/*')
+  return gulp.src('dist/**/*')
       .pipe($.zip('tabular-' + manifest.version + '.zip'))
       .pipe(gulp.dest('package'));
 });
