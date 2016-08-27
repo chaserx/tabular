@@ -26,7 +26,7 @@ function showNotification() {
 }
 
 if (window.Notification) {
-  var tabLimit = JSON.parse(localStorage.tabLimit) || 10;
+  var tabLimit = JSON.parse(localStorage.tabLimit) || 12;
   chrome.tabs.onCreated.addListener(function() {
     chrome.windows.getAll({populate: true}, function(allWindows) {
       var tabCount = allWindows[0].tabs.length;
