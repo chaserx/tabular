@@ -14,6 +14,7 @@ gulp.task('extras', () => {
     '!app/scripts.babel',
     '!app/*.json',
     '!app/*.html',
+    '!app/styles.scss'
   ], {
     base: 'app',
     dot: true
@@ -28,7 +29,7 @@ function lint(files, options) {
   };
 }
 
-gulp.task('lint', lint('app/scripts.babel/**/*.js', {
+gulp.task('lint', lint('app/scripts/babel/**/*.js', {
   env: {
     es6: true
   }
@@ -50,18 +51,25 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('html',  () => {
-  const assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
+gulp.task('styles', () => {
+  return gulp.src('app/styles.scss/*.scss')
+    .pipe($.plumber())
+    .pipe($.sass.sync({
+      outputStyle: 'expanded',
+      precision: 10,
+      includePaths: ['.']
+    }).on('error', $.sass.logError))
+    .pipe(gulp.dest('app/styles'));
+});
 
+gulp.task('html', ['styles'], () => {
   return gulp.src('app/*.html')
-    .pipe(assets)
+    .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.sourcemaps.init())
     .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.minifyCss({compatibility: '*'})))
+    .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
     .pipe($.sourcemaps.write())
-    .pipe(assets.restore())
-    .pipe($.useref())
-    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
+    .pipe($.if('*.html', $.htmlmin({removeComments: true, collapseWhitespace: true})))
     .pipe(gulp.dest('dist'));
 });
 
@@ -76,7 +84,7 @@ gulp.task('chromeManifest', () => {
         ]
       }
   }))
-  .pipe($.if('*.css', $.minifyCss({compatibility: '*'})))
+  .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
   .pipe($.if('*.js', $.sourcemaps.init()))
   .pipe($.if('*.js', $.uglify()))
   .pipe($.if('*.js', $.sourcemaps.write('.')))
@@ -104,7 +112,8 @@ gulp.task('watch', ['lint', 'babel', 'html'], () => {
     'app/_locales/**/*.json'
   ]).on('change', $.livereload.reload);
 
-  gulp.watch('app/scripts.babel/**/*.js', ['lint', 'babel']);
+  gulp.watch('app/scripts/babel/**/*.js', ['lint', 'babel']);
+  gulp.watch('app/styles.scss/**/*.scss', ['styles']);
   gulp.watch('bower.json', ['wiredep']);
 });
 
@@ -122,8 +131,8 @@ gulp.task('wiredep', () => {
 
 gulp.task('package', function () {
   var manifest = require('./dist/manifest.json');
-  return gulp.src('dist/**/*')
-      .pipe($.zip('tabular-' + manifest.version + '.zip'))
+  return gulp.src('dist/**')
+      .pipe($.zip('<%= appname %>-' + manifest.version + '.zip'))
       .pipe(gulp.dest('package'));
 });
 
