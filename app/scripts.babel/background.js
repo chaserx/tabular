@@ -4,14 +4,13 @@ chrome.runtime.onInstalled.addListener(details => {
   console.log('previousVersion', details.previousVersion)
 })
 
-const messages = ['Yo! Watch it on the tabs will ya?!',
-                  'Easy on the tabs, man.',
-                  'Sometimes you get the tab, sometimes the tab gets you.',
-                  'Oh so many tabs. So many.',
-                  'Stop. Stop this tabuse.',
-                  'Seriously?! Another tab?',
-                  'So this is your plan? Another tab. Great.',
-                  'Too much tabs!']
+const messages = ['Everything is going great!',
+                  'Don\'t worry about it',
+                  'Tabs are a great feature of modern browsers',
+                  'More tabs are always better',
+                  'Let\'s open another tab with pictures of puppies',
+                  'You are doing great',
+                  'More tabs, awesome!']
 
 const getMessage = () => {
    return messages[Math.floor(Math.random() * messages.length)]
