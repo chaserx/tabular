@@ -114,7 +114,6 @@ gulp.task('watch', ['lint', 'babel', 'html'], () => {
 
   gulp.watch('app/scripts/babel/**/*.js', ['lint', 'babel']);
   gulp.watch('app/styles.scss/**/*.scss', ['styles']);
-  gulp.watch('bower.json', ['wiredep']);
 });
 
 gulp.task('size', () => {
