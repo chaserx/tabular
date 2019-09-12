@@ -8,7 +8,7 @@ a little chrome extension that pesters you when you open too many tabs
 
 ## how to develop tabular
 
-    `npm install` (or yarn install)
+    `yarn install` (or npm install)
     `gulp build`
     `gulp watch`
 
